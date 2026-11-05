@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+.DS_Store
+*.tsbuildinfo
+
+# working files (original photos, mockups, screenshots), not part of the site
+design/
