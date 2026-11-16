@@ -1401,3 +1401,31 @@ button {
   height: auto;
   max-height: calc(100svh - 140px);
 }
+
+/* resume summary card: compact extras */
+.resume-doc__list {
+  font-weight: 600;
+  line-height: 1.5;
+}
+.resume-doc__list .muted {
+  font-weight: 400;
+}
+.resume-doc__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.resume-doc__skills li {
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #e9e6f3;
+  color: #3b3552;
+}
+.resume-doc__foot {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px dashed #d6d3e2;
+  font-size: 11.5px;
+  color: #7a7f96;
+}

@@ -15,6 +15,8 @@ export const contact = {
  */
 export const resume = {
   file: '',
+  /** The few skills to highlight in the resume preview card (keep it to about 8). */
+  keySkills: ['Java', 'TypeScript', 'React', 'Spring Boot', 'Flutter', 'PostgreSQL', 'Supabase', 'OpenAI API'],
   /** Work experience, internships, volunteering. Shown in About (Experience) and the resume preview. */
   experience: [
     {

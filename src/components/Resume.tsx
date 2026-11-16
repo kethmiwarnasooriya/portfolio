@@ -10,6 +10,10 @@ import { Reveal } from './Reveal';
 /** The preview is generated from the same content files, so it never goes out of date. */
 export function Resume() {
   const allSkills = skillCategories.flatMap((c) => c.skills);
+  // Keep the card short: chosen key skills, or the first few skills as a fallback.
+  const keySkills = (resume.keySkills?.length ? resume.keySkills : [...new Set(allSkills)]).slice(0, 8);
+  const degree = profile.education.find((e) => e.current) ?? profile.education[0];
+  const latestJob = resume.experience[0];
   const hasFile = !!resume.file;
 
   return (
@@ -47,7 +51,7 @@ export function Resume() {
         </div>
 
         <Reveal delay={120} className="resume__doc-wrap">
-          <article className="resume-doc" aria-label="Resume preview">
+          <article className="resume-doc" aria-label="Resume summary">
             <header>
               <p className="resume-doc__name">{profile.name}</p>
               <p className="resume-doc__role">
@@ -56,65 +60,59 @@ export function Resume() {
             </header>
 
             <h3>Education</h3>
-            {profile.education.map((e) => (
-              <div key={e.title} className="resume-doc__row">
-                <p>
-                  <strong>{e.title}</strong>
-                  <span>{e.period || '—'}</span>
-                </p>
-                <p className="muted">{e.place}</p>
-              </div>
-            ))}
+            <div className="resume-doc__row">
+              <p>
+                <strong>{degree.title}</strong>
+                {degree.period && <span>{degree.period}</span>}
+              </p>
+              <p className="muted">{degree.place}</p>
+            </div>
 
-            <h3>Projects</h3>
-            {projects.length ? (
-              projects.slice(0, 4).map((p) => (
-                <div key={p.id} className="resume-doc__row">
+            {latestJob && (
+              <>
+                <h3>Experience</h3>
+                <div className="resume-doc__row">
                   <p>
-                    <strong>{p.title}</strong>
+                    <strong>{latestJob.title.split(',')[0]}</strong>
+                    <span>{latestJob.period}</span>
                   </p>
-                  <p className="muted">{p.tech.join(' · ')}</p>
+                  <p className="muted">{latestJob.place.split(',')[0]}</p>
                 </div>
-              ))
-            ) : (
-              <p className="resume-doc__empty">Added automatically from your projects.</p>
+              </>
+            )}
+
+            {projects.length > 0 && (
+              <>
+                <h3>Projects</h3>
+                <p className="resume-doc__list">
+                  {projects.slice(0, 3).map((p) => p.title.split(' — ')[0]).join(' · ')}
+                  {projects.length > 3 && <span className="muted"> +{projects.length - 3} more</span>}
+                </p>
+              </>
             )}
 
             {certifications.length > 0 && (
               <>
                 <h3>Certifications</h3>
-                {certifications.map((c) => (
-                  <div key={c.id} className="resume-doc__row">
-                    <p>
-                      <strong>{c.title}</strong>
-                      <span>{c.date}</span>
-                    </p>
-                    <p className="muted">
-                      {c.issuer}
-                      {c.platform && ` · ${c.platform}`}
-                    </p>
-                  </div>
-                ))}
+                <p className="resume-doc__list">
+                  {certifications[0].title}
+                  {certifications.length > 1 && <span className="muted"> +{certifications.length - 1} more</span>}
+                </p>
               </>
             )}
 
-            <h3>Technical skills</h3>
-            {allSkills.length ? <p className="muted">{allSkills.join(' · ')}</p> : <p className="resume-doc__empty">Added automatically from your skills.</p>}
-
-            <h3>Experience</h3>
-            {resume.experience.length ? (
-              resume.experience.map((x) => (
-                <div key={x.title + x.place} className="resume-doc__row">
-                  <p>
-                    <strong>{x.title}</strong>
-                    <span>{x.period}</span>
-                  </p>
-                  <p className="muted">{x.place}</p>
-                </div>
-              ))
-            ) : (
-              <p className="resume-doc__empty">Optional: internships, volunteering, clubs.</p>
+            {keySkills.length > 0 && (
+              <>
+                <h3>Key skills</h3>
+                <ul className="resume-doc__skills">
+                  {keySkills.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ul>
+              </>
             )}
+
+            <p className="resume-doc__foot">Full details in the downloadable CV</p>
           </article>
         </Reveal>
       </div>
