@@ -7,3 +7,7 @@ dist
 
 # working files (original photos, mockups, screenshots), not part of the site
 design/
+
+# generated at build time for the Worker
+worker/video-sizes.json
+.wrangler/
