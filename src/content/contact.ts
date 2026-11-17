@@ -14,7 +14,7 @@ export const contact = {
  * Resume / CV. Put your PDF at /public/resume.pdf and set `file` to '/resume.pdf'.
  */
 export const resume = {
-  file: '',
+  file: '/Kethmi-Warnasooriya-CV.pdf',
   /** The few skills to highlight in the resume preview card (keep it to about 8). */
   keySkills: ['Java', 'TypeScript', 'React', 'Spring Boot', 'Flutter', 'PostgreSQL', 'Supabase', 'OpenAI API'],
   /** Work experience, internships, volunteering. Shown in About (Experience) and the resume preview. */
