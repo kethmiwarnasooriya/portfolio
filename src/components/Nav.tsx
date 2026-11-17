@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { Icon } from './Icon';
 
-export const SECTIONS = [
+export const SECTIONS: { id: string; label: string; mobileOnly?: boolean }[] = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'certifications', label: 'Certifications' },
-  { id: 'resume', label: 'Resume' },
+  { id: 'resume', label: 'Resume', mobileOnly: true }, // the hero has its own resume button
   { id: 'contact', label: 'Contact' },
 ];
 const IDS = SECTIONS.map((s) => s.id);
@@ -49,7 +49,7 @@ export function Nav() {
       </a>
 
       <nav aria-label="Main" className="nav__links">
-        {SECTIONS.map((s) => (
+        {SECTIONS.filter((s) => !s.mobileOnly).map((s) => (
           <a key={s.id} href={`#${s.id}`} className={active === s.id ? 'is-active' : ''} aria-current={active === s.id ? 'location' : undefined}>
             {s.label}
           </a>

@@ -13,8 +13,11 @@ export const profile = {
   location: 'Sri Lanka',
 
   /** One or two sentences shown under your name on the landing page. */
+  /** Short line shown under the hero tagline. */
+  status: 'Open to software engineering & AI internships',
+
   intro:
-    'Computer Science undergraduate exploring software engineering, AI and mobile development, and turning ideas into practical software.',
+    'Building full-stack web applications, native mobile experiences, and ML-powered systems—from real-time safety predictors to AI skill-verification platforms.',
 
   interests: [
     'Software Engineering',
